@@ -1,5 +1,5 @@
 # distribute-rate-limiter
-A rate limiter share token bucket across processes, use redis as share storage.
+A rate limiter share token bucket across processes, use redis as shared storage.
 
 ## Usage
 ```js

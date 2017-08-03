@@ -3,7 +3,10 @@ const Redis = require('ioredis')
 const RateLimiter = require('../lib/rate-limiter')
 
 test.cb('removeTokens', t => {
-  const redisClient = new Redis()
+  const redisClient = new Redis({
+    host: process.env.REDIS_PORT_6379_TCP_ADDR || '127.0.0.1',
+    port: process.env.REDIS_PORT_6379_TCP_PORT || 6379,
+  })
   const rateLimiter = new RateLimiter({ redisClient, redisKeyPrefix: 'rate-limiter', tokensPerSecond: 10 })
   rateLimiter.on('ready', () => {
     rateLimiter.tryRemoveTokens(20)

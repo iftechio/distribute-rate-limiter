@@ -1,8 +1,8 @@
 {
   "name": "distribute-rate-limiter",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "",
-  "main": "index.js",
+  "main": "lib/rate-limiter.js",
   "scripts": {
     "test": "./node_modules/.bin/ava tests"
   },

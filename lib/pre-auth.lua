@@ -8,7 +8,7 @@ if not currentPreAuth then
   currentPreAuth = '0'
 end
 currentPreAuth = tonumber(currentPreAuth)
-if currentContent > currentPreAuth + count or (currentContent == capacity and currentPreAuth == 0) then
+if currentContent >= currentPreAuth + count then
   redis.call('incrbyfloat', keyPrefix .. '.preAuth', count)
   return true
 else

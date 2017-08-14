@@ -9,6 +9,18 @@ const rateLimiter = new RateLimiter({redisClient: new Redis, redisKeyPrefix: 'ra
 rateLimiter.getTokensRemaining().then(count => console.log(count)) // 10
 rateLimiter.tryRemoveTokens(10).then(result => console.log(result)) // true
 rateLimiter.tryRemoveTokens(100).then(result => console.log(result)) // false
+
+// pre-auth mode
+const preAuthAmount = 20
+rateLimiter.preAuth(preAuthAmount)
+.then(preAuthResult => {
+  if (preAuthResult) {
+    doBusiness()
+      .then(consumedCapacity => {
+        rateLimiter.clearTransaction(consumedCapacity, preAuthAmount)
+      })
+  }
+})
 ```
 
 ## Why redis script instead of watch/exec?
